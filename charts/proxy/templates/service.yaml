@@ -1,0 +1,26 @@
+{{- if .Values.service.ambassador.enabled -}}
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    getambassador.io/config: |
+      ---
+      apiVersion: ambassador/v2
+      kind: TCPMapping
+      name: v2fly
+      port: {{ .Values.service.port }}
+      service: {{ include "proxy.service.ambassador.name" . }}.{{ .Release.Namespace }}:{{ .Values.service.port }}
+  name: {{ include "proxy.service.ambassador.name" . }}
+  labels:
+    {{- include "proxy.labels" . | nindent 4 }}
+spec:
+  sessionAffinity: None
+  type: ClusterIP
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: proxy
+      protocol: TCP
+      name: proxy
+  selector:
+    {{- include "proxy.selectorLabels" . | nindent 4 }}
+{{- end }}
