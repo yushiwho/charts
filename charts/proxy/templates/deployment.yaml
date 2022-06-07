@@ -1,0 +1,57 @@
+{{- if semverCompare ">=1.16-0" .Capabilities.KubeVersion.GitVersion -}}
+apiVersion: apps/v1
+{{- else -}}
+apiVersion: extensions/v1beta1
+{{- end }}
+kind: Deployment
+metadata:
+  name: {{ include "proxy.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels: 
+    {{- include "proxy.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels: {{- include "proxy.selectorLabels" .| nindent 6 }}
+  replicas: {{ .Values.deploy.replicas }}
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels: {{- include "proxy.labels" . | nindent 8  }}
+    spec:
+{{- with .Values.dnsConfig}}      
+      hostAliases:
+{{ toYaml . | indent 8}}
+{{- end }}
+      containers:
+      - image: {{ include "proxy.image" . }}
+        imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
+        name: v2fly
+        ports:
+        - containerPort: {{ .Values.service.port }}
+          name: proxy
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /etc/v2ray
+          name: config-volume
+        resources:
+          requests:
+            cpu: "1"
+            ephemeral-storage: 40Gi
+            memory: 2Gi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        tty: true
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - configMap:
+            defaultMode: 420
+            name: {{ include "proxy.fullname" . }}
+          name: config-volume
