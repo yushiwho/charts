@@ -7,10 +7,11 @@ metadata:
       ---
       apiVersion: ambassador/v2
       kind: TCPMapping
-      name: v2fly
+      name: {{ include "proxy.service.ambassador.name" . }}
       port: {{ .Values.service.port }}
-      service: {{ include "proxy.service.ambassador.name" . }}.{{ .Release.Namespace }}:{{ .Values.service.port }}
+      service: {{ include "proxy.service.ambassador.name" . }}.{{ .Values.namespace }}:{{ .Values.service.port }}
   name: {{ include "proxy.service.ambassador.name" . }}
+  namespace: {{ .Values.namespace }}
   labels:
     {{- include "proxy.labels" . | nindent 4 }}
 spec:

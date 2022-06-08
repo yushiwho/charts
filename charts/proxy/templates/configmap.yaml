@@ -46,4 +46,4 @@ metadata:
   labels: 
   {{- include "proxy.labels" . | nindent  4 }}
   name: {{ include "proxy.fullname" . }}
-  namespace: {{ .Release.Namespace }}
+  namespace: {{ .Values.namespace }}
