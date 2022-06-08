@@ -1,8 +1,11 @@
+namespace: proxy
+fullnameOverride: proxy
 image:
   registry: "docker.io"
   repository: "v2fly/v2fly-core"
   tag: "v4.45.0"
   pullPolicy: IfNotPresent
+k8sApiVersion: "extensions/v1beta1"
 service:
   type: ClusterIP
   port: 9000

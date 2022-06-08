@@ -1,12 +1,8 @@
-{{- if semverCompare ">=1.16-0" .Capabilities.KubeVersion.GitVersion -}}
-apiVersion: apps/v1
-{{- else -}}
-apiVersion: extensions/v1beta1
-{{- end }}
+apiVersion: {{ .Values.k8sApiVersion | default "extensions/v1beta1" }}
 kind: Deployment
 metadata:
   name: {{ include "proxy.fullname" . }}
-  namespace: {{ .Release.Namespace }}
+  namespace: {{ .Values.namespace }}
   labels: 
     {{- include "proxy.labels" . | nindent 4 }}
 spec:
@@ -23,7 +19,7 @@ spec:
       creationTimestamp: null
       labels: {{- include "proxy.labels" . | nindent 8  }}
     spec:
-{{- with .Values.dnsConfig}}      
+{{- with .Values.deploy.hostAliases}}      
       hostAliases:
 {{ toYaml . | indent 8}}
 {{- end }}
