@@ -3,3 +3,5 @@ appVersion: v4.45.0
 name: proxy
 version: 0.0.1
 description: A helm chart for v2fly proxy
+maintainers:
+- name: yushiwho
