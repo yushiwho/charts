@@ -3,6 +3,17 @@ entries:
   proxy:
   - apiVersion: v2
     appVersion: v4.45.0
+    created: "2022-06-13T04:32:14.944681421Z"
+    description: A helm chart for v2fly proxy
+    digest: 794b6475aa1b3cfc3e44d6f179c91fe1777c2e41c1b6df9a6459dcb5a8466236
+    maintainers:
+    - name: yushiwho
+    name: proxy
+    urls:
+    - https://github.com/yushiwho/charts/releases/download/proxy-0.0.2/proxy-0.0.2.tgz
+    version: 0.0.2
+  - apiVersion: v2
+    appVersion: v4.45.0
     created: "2022-06-13T03:43:51.13492873Z"
     description: A helm chart for v2fly proxy
     digest: c55522dedabd3499ebd51fbb9ccd6facb0874b65a695bb6e80e4ff267bb40d49
