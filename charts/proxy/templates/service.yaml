@@ -10,6 +10,14 @@ metadata:
       name: {{ include "proxy.service.ambassador.name" . }}
       port: {{ .Values.service.port }}
       service: {{ include "proxy.service.ambassador.name" . }}.{{ .Values.namespace }}:{{ .Values.service.port }}
+      {{- if .Values.app.http.enabled }}
+      ---
+      apiVersion: ambassador/v2
+      kind: TCPMapping
+      name: {{ include "proxy.service.ambassador.name" . }}-http
+      port: {{ .Values.service.httpPort }}
+      service: {{ include "proxy.service.ambassador.name" . }}.{{ .Values.namespace }}:{{ .Values.service.httpPort }}
+      {{- end}}
   name: {{ include "proxy.service.ambassador.name" . }}
   namespace: {{ .Values.namespace }}
   labels:
@@ -22,6 +30,12 @@ spec:
       targetPort: proxy
       protocol: TCP
       name: proxy
+    {{- if .Values.app.http.enabled }}
+    - port: {{ .Values.service.httpPort }}
+      targetPort: proxy-http
+      protocol: TCP
+      name: proxy-http  
+    {{- end}}
   selector:
     {{- include "proxy.selectorLabels" . | nindent 4 }}
 {{- end }}
