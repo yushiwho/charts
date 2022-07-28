@@ -27,39 +27,8 @@ data:
                   "auth": "noauth",
                   "udp": false
               }
-          }
-      ],
-      "outbounds": [
-          {
-              "protocol": "freedom",
-              "tag": "direct"
-          },
-          {
-              "protocol": "blackhole",
-              "tag": "block"
-          }
-      ]
-    }  
-  {{- end}}
-  {{- if .Values.app.http.enabled }}
-    {
-      "log": {
-          "loglevel": "debug"
-      },
-      "routing": {
-          "domainStrategy": "AsIs",
-          "rules": [
-              {
-                  "type": "field",
-                  "ip": [
-                      "geoip:private"
-                  ],
-                  "outboundTag": "block"
-              }
-          ]
-      },
-      "inbounds": [
-          {
+{{- if .Values.app.http.enabled }}              
+          },{
               "listen": "0.0.0.0",
               "port": {{ .Values.service.httpPort }},
               "protocol": "http",
@@ -67,6 +36,7 @@ data:
                   "auth": "noauth",
                   "udp": false
               }
+ {{- end}}              
           }
       ],
       "outbounds": [
