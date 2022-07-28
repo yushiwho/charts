@@ -3,7 +3,7 @@ fullnameOverride: proxy
 image:
   registry: "docker.io"
   repository: "v2fly/v2fly-core"
-  tag: "v4.45.0"
+  tag: "latest"
   pullPolicy: IfNotPresent
 k8sApiVersion: "extensions/v1beta1"
 service:
