@@ -1,0 +1,7 @@
+apiVersion: v2
+appVersion: v0.0.1
+name: demo-backend
+version: 0.0.1
+description: A helm chart for backend demo
+maintainers:
+- name: yushiwho
