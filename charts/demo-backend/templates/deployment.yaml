@@ -20,7 +20,10 @@ metadata:
 spec:
   replicas: {{ .Values.deployment.replicas }}
   strategy:
-    type: Recreate
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
   selector:
     matchLabels: {{- include "demo-backend.selectorLabels" . | nindent 6 }}
   template:

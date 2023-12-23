@@ -20,7 +20,10 @@ metadata:
 spec:
   replicas: {{ .Values.deployment.replicas }}
   strategy:
-    type: Recreate
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
   selector:
     matchLabels: {{- include "demo-frontend.selectorLabels" . | nindent 6 }}
   template:
@@ -54,11 +57,11 @@ spec:
           {{- if .Values.deployment.command }}
           command: {{- tpl ( .Values.deployment.command | toYaml ) . | nindent 12 }}
           {{- end }}
-          args:
-            - nginx
-            - -g
-            - daemon off;
           env:
+          {{- if .Values.deployment.backendHost }}
+            - name: BACKEND_HOST
+              value: {{ .Values.deployment.backendHost }}
+          {{- end }}
             - name: POD_NAME
               valueFrom:
                 fieldRef:

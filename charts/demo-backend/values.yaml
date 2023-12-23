@@ -3,7 +3,7 @@ namespace: demo-backend
 image:
   registry: "quay.io"
   repository: "yushiwho/api"
-  tag: "3a2aa67"
+  tag: "e1f9d77"
   pullPolicy: IfNotPresent 
 fullnameOverride: ""
 commonLabels: {}
@@ -48,3 +48,27 @@ deployment:
   # affinity, tolerations, hostNetwork, etc.  
   extraPodSpec: {}
   extraVolumes: []
+
+ingress:
+  create: true
+  labels: {}
+  host: ""
+  commonAnnotations:
+    alb.ingress.kubernetes.io/group.name: demo
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 5000}]'
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+  httpAnnotations: {}
+  grpcAnnotations: {}
+  ingressClassName: "alb"
+  httpIngressClassName: ""
+  grpcIngressClassName: ""
+  tls: []
+  httpTls: []
+  grpcTls: []
+  httpExtraPaths:
+    prepend: []
+    append: []
+  grpcExtraPaths:
+    prepend: []
+    append: []  
