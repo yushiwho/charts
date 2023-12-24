@@ -1,0 +1,53 @@
+nameOverride: ""
+namespace: demo-backend
+image:
+  registry: "quay.io"
+  repository: "yushiwho/api"
+  tag: "e1f9d77"
+  pullPolicy: IfNotPresent 
+fullnameOverride: ""
+commonLabels: {}
+commonAnnotations: {}
+selectorLabels: {}
+configmap:
+  name: conf
+service:
+  type: NodePort
+  ports:
+    http: 5000
+  nodePorts:
+    http: 5000
+    grpc: ""
+
+serviceAccount:
+  create: true
+  labels: {}
+  annotations: {}
+  imagePullSecrets: []
+
+deployment:
+  replicas: 1
+  labels: {}
+  annotations: {}
+  podLabels: {}
+  podAnnotations: {}
+  extraVolumeMounts: {}
+  lifecycleHooks: {}
+  resources:
+    limits:
+      memory: 256Mi
+      cpu: 100m
+    requests:
+      memory: 256Mi
+      cpu: 100m
+  podSecurityContext:
+    enabled: false
+    runAsUser: 65534
+    runAsGroup: 65534
+    fsGroup: 65534      
+  # affinity, tolerations, hostNetwork, etc.  
+  extraPodSpec: {}
+  extraVolumes: []
+
+ingress:
+  create: false

@@ -1,31 +1,31 @@
-# proxy
+# demo-frontend
 
-## v2fly as a tcp proxy
+## demo-frontend for React
 
-v2fly in kubernetes with ambassador gateway
+a demo-frontend app
 
 ## QuickStart
 
 ```bash
-$ helm repo add proxy https://yushiwho.github.io/charts
+$ helm repo add demo-frontend https://yushiwho.github.io/charts
 $ helm repo update
-$ helm install foo proxy/proxy --namespace proxy
+$ helm install my-release demo-frontend/demo-frontend --namespace demo-frontend
 ```
 
 ## Introduction
 
-This chart deploys v2fly
+This chart deploys a React app
 
 ## Prerequisites
 
-- Kubernetes 1.14+
+- Kubernetes 1.24+
 
 ## Installing the Chart
 
 To install the chart with the release name `my-release`:
 
 ```bash
-$ helm install my-release proxy/proxy --namespace proxy
+$ helm install my-release demo-frontend/demo-frontend --namespace demo-frontend
 ```
 
 > **Tip**: List all releases using `helm list`
