@@ -3,6 +3,17 @@ entries:
   demo-backend:
   - apiVersion: v2
     appVersion: v0.0.1
+    created: "2023-12-24T10:20:21.178783441Z"
+    description: A helm chart for backend demo
+    digest: 1ae2c862109a626e4c940e7600f091a7b56bbad3665cfaa4ce834d31d553166a
+    maintainers:
+    - name: yushiwho
+    name: demo-backend
+    urls:
+    - https://github.com/yushiwho/charts/releases/download/demo-backend-0.0.2/demo-backend-0.0.2.tgz
+    version: 0.0.2
+  - apiVersion: v2
+    appVersion: v0.0.1
     created: "2023-12-22T14:26:37.833904348Z"
     description: A helm chart for backend demo
     digest: d75399cbf86902ab2808e4ac5564a62a02f9cdfcf7ea65e3480f48076d9a547f
@@ -13,6 +24,17 @@ entries:
     - https://github.com/yushiwho/charts/releases/download/demo-backend-0.0.1/demo-backend-0.0.1.tgz
     version: 0.0.1
   demo-frontend:
+  - apiVersion: v2
+    appVersion: v0.0.1
+    created: "2023-12-24T10:20:21.310003942Z"
+    description: A helm chart for frontend demo
+    digest: 24f001537ed0904266a73447e32c4cf9ebe9e2c4e8d58ffac1a42fa7ab850aeb
+    maintainers:
+    - name: yushiwho
+    name: demo-frontend
+    urls:
+    - https://github.com/yushiwho/charts/releases/download/demo-frontend-0.0.2/demo-frontend-0.0.2.tgz
+    version: 0.0.2
   - apiVersion: v2
     appVersion: v0.0.1
     created: "2023-12-22T14:26:38.068871161Z"
