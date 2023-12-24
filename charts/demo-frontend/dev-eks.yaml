@@ -1,0 +1,75 @@
+nameOverride: ""
+namespace: demo-frontend
+image:
+  registry: "quay.io"
+  repository: "yushiwho/sys-stats"
+  tag: "39d2ea4"
+  pullPolicy: IfNotPresent 
+fullnameOverride: ""
+commonLabels: {}
+commonAnnotations: {}
+selectorLabels: {}
+configmap:
+  name: conf
+service:
+  type: ClusterIP
+  ports:
+    http: 80
+  nodePorts:
+    http: ""
+    grpc: ""
+
+serviceAccount:
+  create: true
+  labels: {}
+  annotations: {}
+  imagePullSecrets: []
+
+deployment:
+  replicas: 1
+  labels: {}
+  annotations: {}
+  podLabels: {}
+  podAnnotations: {}
+  extraVolumeMounts: {}
+  lifecycleHooks: {}
+  backendHost: "https://CHANGE_ME_DOMAIN_NAME"
+  resources:
+    limits:
+      memory: 256Mi
+      cpu: 100m
+    requests:
+      memory: 256Mi
+      cpu: 100m
+  podSecurityContext:
+    enabled: false
+    runAsUser: 65534
+    runAsGroup: 65534
+    fsGroup: 65534      
+  extraPodSpec: {}
+  extraVolumes: []
+
+ingress:
+  create: true
+  labels: {}
+  host: "CHANGE_ME_DOMAIN_NAME"
+  commonAnnotations:
+    alb.ingress.kubernetes.io/certificate-arn: "CHANGE_ME_ACM_ARN" # eg: 'arn:aws:acm:us-west-1:X:certificate/XX'
+    alb.ingress.kubernetes.io/group.name: demo
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/ssl-redirect: '443'
+    alb.ingress.kubernetes.io/target-type: ip
+  grpcAnnotations: {}
+  ingressClassName: "alb"
+  httpIngressClassName: ""
+  grpcIngressClassName: ""
+  tls: []
+  httpTls: []
+  grpcTls: []
+  httpExtraPaths:
+    prepend: []
+    append: []
+  grpcExtraPaths:
+    prepend: []
+    append: []
